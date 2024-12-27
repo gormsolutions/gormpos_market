@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Invoice</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+    
+        .print-format {
+            width: 58mm;
+            padding: 5px;
+            margin: 0 auto;
+            background-color: #fff;
+            font-size: 12px; /* Increased font size */
+            line-height: 1.4; /* Adjusted for readability */
+        }
+    
+        .text-center {
+            text-align: center;
+        }
+    
+        .invoice-header {
+            margin-bottom: 5px;
+            border-bottom: 1px dashed #000;
+            padding-bottom: 5px;
+        }
+    
+        h1, h2, h3, p {
+            margin: 0;
+            padding: 0;
+        }
+    
+        .company-name {
+            font-size: 14px; /* Increased font size */
+            font-weight: 900; /* Boldness enhanced */
+        }
+    
+        .invoice-details {
+            margin-top: 5px;
+        }
+    
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 5px;
+        }
+    
+        th, td {
+            padding: 4px 7px; /* Increased padding for better spacing */
+            text-align: left;
+            border: none;
+        }
+    
+        th {
+            font-size: 12px; /* Increased font size */
+            font-weight: 900; /* Enhanced boldness */
+            border-bottom: 1px solid #000;
+        }
+    
+        td {
+            font-size: 12px; /* Increased font size */
+        }
+    
+        .summary-table td {
+            text-align: right;
+        }
+    
+        .summary-table td:first-child {
+            text-align: left;
+            font-weight: 900; /* Boldness enhanced */
+        }
+    
+        .total {
+            font-weight: 900; /* Enhanced boldness */
+            font-size: 14px; /* Increased font size */
+        }
+    
+        .total-amount {
+            color: #000;
+            font-size: 14px; /* Increased font size */
+            font-weight: 900; /* Enhanced boldness */
+        }
+    
+        .thank-you {
+            margin-top: 10px;
+            font-size: 12px; /* Increased font size */
+            text-align: center;
+        }
+    
+        /* Hide unnecessary sections for small POS printing */
+        @media print {
+            body {
+                margin: 0;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="print-format">
+        <div class="text-center invoice-header">
+            <h2 class="company-name">{{ doc.company }}</h2>
+            <p><b>{{ _("Invoice No") }}:</b> {{ doc.name }}</p>
+            <p><b>{{ _("Date") }}:</b> {{ doc.get_formatted("posting_date") }}</p>
+            <p><b>{{ _("Customer") }}:</b> {{ doc.customer_name }}</p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>{{ _("Item") }}</th>
+                    <th>{{ _("Qty") }}</th>
+                    <th>{{ _("Rate") }}</th>
+                    <th>{{ _("Amt") }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%- for item in doc.items -%}
+                <tr>
+                    <td>{{ item.item_name }}</td>
+                    <td>{{ item.qty }}</td>
+                    <td>{{ item.rate }}</td>
+                    <td>{{ item.amount }}</td>
+                </tr>
+                {%- endfor -%}
+            </tbody>
+        </table>
+        <hr>
+        <table class="summary-table">
+            <tbody>
+                {%- if doc.discount_amount -%}
+                <tr>
+                    <td>{{ _("Discount") }}</td>
+                    <td>{{ doc.discount_amount }}</td>
+                </tr>
+                {%- endif -%}
+                <tr>
+                    <td class="total">{{ _("Grand Total") }}</td>
+                    <td class="total-amount">{{ doc.grand_total }}</td>
+                </tr>
+                {%- if doc.custom_cash_given -%}
+                <tr>
+                    <td>{{ _("Cash Given") }}</td>
+                    <td>{{ doc.custom_cash_given }}</td>
+                </tr>
+                {%- endif -%}
+                {%- if doc.outstanding_amount -%}
+                <tr>
+                    <td>{{ _("Outstanding") }}</td>
+                    <td>{{ doc.outstanding_amount }}</td>
+                </tr>
+                {%- endif -%}
+                <tr>
+                    <td>{{ _("Balance") }}</td>
+                    <td>
+                        {% if doc.custom_cash_given > 0 %}
+                            {% set paid = doc.custom_cash_given - doc.grand_total %}
+                            {{ paid }}
+                        {% else %}
+                            {{ _("No balance calculated") }}
+                        {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="thank-you">{{ doc.terms or "" }}</p>
+        <p class="thank-you">{{ _("Thank you, please visit again.") }}</p>
+        <p class="thank-you">{{ _("Served by:") }} {{ user_full_name }}</p>
+    </div>
+</body>
+
+</html>

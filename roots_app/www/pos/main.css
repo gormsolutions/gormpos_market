@@ -1,0 +1,395 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Header Styles */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+.header-content h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+/* POS Container */
+.pos-container {
+    display: flex;
+    flex-grow: 1;
+    padding: 20px;
+    gap: 20px;
+    overflow: hidden;
+}
+
+/* Items Section */
+.items-section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Search Bar and Item Group Dropdown */
+.search-bar {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    padding: 10px;
+    z-index: 5;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar select,
+.search-bar input {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 250px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.search-bar select:focus,
+.search-bar input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+/* Items Container Styles */
+.items-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    overflow-y: auto;
+    height: 100%;
+}
+
+/* Item Card Styling */
+.item-card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+}
+
+.item-card:hover {
+    transform: translateY(-5px);
+}
+
+.item-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.item-card h4 {
+    font-size: 1.1em;
+    margin: 10px 0;
+}
+
+.item-card p {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.item-card button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.item-card button:hover {
+    background-color: #45a049;
+    transform: translateY(-3px);
+}
+
+.item-card button:active {
+    background-color: #388e3c;
+    transform: translateY(1px);
+}
+
+/* Cart Container */
+.cart-container {
+    position: sticky;
+    top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 550px;
+    height: 80vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    z-index: 5;
+    align-self: flex-start;
+}
+
+/* Cart Header */
+.cart-container h3 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Cart Items */
+#cart-items {
+    flex-grow: 1;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Cart Item */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.cart-item .item-name {
+    font-size: 1rem;
+    color: #333;
+    flex-grow: 1;
+}
+
+.cart-item .quantity-container {
+    display: flex;
+    align-items: center;
+}
+
+.cart-item .quantity-input {
+    width: 50px;
+    padding: 5px;
+    font-size: 1.2rem;
+    text-align: center;
+    border-radius: 4px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    border: 1px solid #ccc
+}
+
+.cart-item .item-total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.cart-item .delete-btn {
+    padding: 5px 10px;
+    background-color: #FF5733;
+    color: white;
+    border: none;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cart-item .delete-btn:hover {
+    background-color: #e04f30;
+    transform: translateY(-3px);
+}
+
+.cart-item .delete-btn:active {
+    background-color: #c43e24;
+    transform: translateY(1px);
+}
+
+/* Cart Total */
+#cart-total {
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+#cart-total p {
+    margin: 10px 0;
+}
+
+#cart-total input {
+    padding: 12px;
+    font-size: 1.1rem;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+#cart-total input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+#cart-total button {
+    width: 100%;
+    padding: 14px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    font-size: 1.2em;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#cart-total button:hover {
+    background-color: #45a049;
+    transform: translateY(-3px);
+}
+
+#cart-total button:active {
+    background-color: #388e3c;
+    transform: translateY(1px);
+}
+
+#cart-total button + button {
+    background-color: #FF9800;
+}
+
+#cart-total button + button:hover {
+    background-color: #e68900;
+}
+
+#cart-total button + button:active {
+    background-color: #f57c00;
+}
+
+
+
+/* Modal Styles */
+.modal {
+    display: none;  /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);  /* Semi-transparent background */
+    display: flex;  /* Enables flexbox */
+    justify-content: center;  /* Centers the content horizontally */
+    align-items: center;  /* Centers the content vertically */
+    z-index: 1000;  /* Ensure it's above other content */
+}
+
+/* Modal Content Styles */
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Modal Title Styles */
+.modal-content h3 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+/* Queue Table Styles */
+.queue-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.queue-table th, .queue-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.queue-table th {
+    background-color: #f1f1f1;
+}
+
+/* Button Styles */
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: translateY(-3px);
+}
+
+button:active {
+    background-color: #388e3c;
+    transform: translateY(1px);
+}
+
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+    .pos-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .search-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .items-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .cart-container {
+        position: relative;
+        max-width: 100%;
+        margin-top: 20px;
+        z-index: 1;
+    }
+}
