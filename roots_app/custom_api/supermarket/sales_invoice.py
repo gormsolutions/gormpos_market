@@ -48,7 +48,7 @@ def create_invoice(paid_amount, items,custom_cash_given, customer_name=None,user
         # Construct the Sales Invoice document
         invoice_doc_data = {
             "doctype": "Sales Invoice",
-            "customer": "Roots Lounge Cash Customer",
+            "customer": "Cash Customer",
             "custom_cash_given":custom_cash_given,
             # "from_mobile_app": "Mobile App Cash Customer",
             "update_stock": update_stock,  # Ensure update_stock is enabled
